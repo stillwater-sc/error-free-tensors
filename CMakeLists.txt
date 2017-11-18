@@ -12,7 +12,6 @@ macro(trace_variable variable)
     endif()
 endmacro()
         
-
 # TODO: Check whether this is needed for old CMake versions
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake") 
 trace_variable(CMAKE_MODULE_PATH)
@@ -38,10 +37,12 @@ include_directories(${MTL_INCLUDE_DIRS})
 add_definitions(${MTL_CXX_DEFINITIONS})
 
 # Set posit include directory
-include_directories("./posit")
+find_package(UNUM REQUIRED)
+include_directories(${UNUM_INCLUDE_DIRS})
+message(STATUS "UNUM INCLUDE DIR " ${UNUM_INCLUDE_DIRS})
 
 # Possibly not under Windows
-add_compile_options ( -std=c++11 )
+#add_compile_options ( -std=c++11 )
 
 macro (compile_all testing prefix)
     # cycle through the sources
