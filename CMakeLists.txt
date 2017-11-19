@@ -2,9 +2,9 @@ project (error-free-tensors)
 
 cmake_minimum_required(VERSION 2.8)
 
-option(UNIVERSAL_CMAKE_TRACE "Tracing CMake results, i.e. printing variable settings." OFF)
-option(UNIVERSAL_ENABLE_TESTS "Enable the build and run of tests." ON)
-option(UNIVERSAL_VERBOSE_TESTS "Always print test output, otherwise only errors. Only relevant when tests enabled." OFF)
+option(EF_TENSORS_CMAKE_TRACE "Tracing CMake results, i.e. printing variable settings." OFF)
+option(EF_TENSORS_ENABLE_TESTS "Enable the build and run of tests." ON)
+option(EF_TENSORS_VERBOSE_TESTS "Always print test output, otherwise only errors. Only relevant when tests enabled." OFF)
 
 macro(trace_variable variable)
     if (EF_TENSORS_CMAKE_TRACE)
