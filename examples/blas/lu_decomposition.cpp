@@ -14,6 +14,7 @@
 #include <posit>
 
 using namespace std;
+using namespace sw::unum;
 
 // Turn it of for now
 #define USE_POSIT
