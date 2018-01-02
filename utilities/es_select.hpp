@@ -15,7 +15,7 @@ template <std::size_t ES>
 using es_tag = std::integral_constant<std::size_t, ES>;
 
 /// All possible variants of es values.
-using es_variant = boost::variant<es_tag<1>, es_tag<2>, es_tag<4>>;
+using es_variant = boost::variant<es_tag<0>, es_tag<1>, es_tag<2>, es_tag<3>, es_tag<4>, es_tag<5>>;
 
 struct undefined_es_variant
   : std::runtime_error
@@ -28,9 +28,12 @@ struct undefined_es_variant
 inline es_variant es_select(size_t es)
 {
     switch (es) {
+		case 0: return es_tag<0>{};
         case 1: return es_tag<1>{};
         case 2: return es_tag<2>{};
+		case 3: return es_tag<3>{};
         case 4: return es_tag<4>{};
+		case 5: return es_tag<5>{};
         default: throw undefined_es_variant{}; 
     }
     

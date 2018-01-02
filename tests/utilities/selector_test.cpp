@@ -79,7 +79,7 @@ try {
     boost::apply_visitor(print_nbits_variant{}, nbitsv);
     
     
-    es_variant esv = es_tag<1>{};                           // init to avoid trouble without cmd line args
+    es_variant esv = es_tag<0>{};                           // init to avoid trouble without cmd line args
     if (argc > 2)
         esv = es_select(size_t(stoull(argv[2])));
     
