@@ -65,5 +65,6 @@ endmacro (compile_all)
 
 
 add_subdirectory("tests/utilities")
+add_subdirectory("tools/cmd")
 add_subdirectory("examples/blas")
 add_subdirectory("examples/dsp")
