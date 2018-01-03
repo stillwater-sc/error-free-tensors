@@ -1,6 +1,10 @@
 # Build directory
 build
 
+# CLion IDE config caches
+.idea
+cmake-build-debug
+
 # KDE IDE config caches
 .kdev4
 *.kdev4
