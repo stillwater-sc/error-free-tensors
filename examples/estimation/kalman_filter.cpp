@@ -81,13 +81,13 @@ try {
   // Feed measurements into filter, output estimated states
   double t = 0;
   Vector y(m);
-  std::cout << "t = " << t << ", " << "x_hat[0]: " << kf.state().transpose() << std::endl;
+  std::cout << "t = " << t << ", " << "x_hat[0]: " << trans(kf.state()) << std::endl;
   for(int i = 0; i < measurements.size(); i++) {
     t += dt;
     y = measurements[i];
     kf.update(y);
-    std::cout << "t = " << t << ", " << "y[" << i << "] = " << y.transpose()
-        << ", x_hat[" << i << "] = " << kf.state().transpose() << std::endl;
+    std::cout << "t = " << t << ", " << "y[" << i << "] = " << trans(y)
+        << ", x_hat[" << i << "] = " << trans(kf.state()) << std::endl;
   }
 
   return EXIT_SUCCESS;

@@ -62,8 +62,8 @@ public:
   void update(const mtl::dense_vector<Ty>& y) {
 	  mtl::dense_vector<Ty> x_hat_new(n);
 	  x_hat_new = A * x_hat;
-	  P = A * P * A.transpose() + Q;
-	  K = P * C.transpose() * (C * P * C.transpose() + R).inverse();
+	  P = A * P * trans(A) + Q;
+	  K = P * trans(C) * (C * P * trans(C) + R).inverse();
 	  x_hat_new += K * (y - C * x_hat_new);
 	  P = (I - K * C) * P;
 	  x_hat = x_hat_new;
