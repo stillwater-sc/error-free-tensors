@@ -5,7 +5,7 @@
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
 // enable the mathematical constants in cmath: old-style preprocessor magic which isn't best practice anymore
-#include "stdafx.h"
+#include "common.hpp"
 
 #include <posit>
 #include <boost/numeric/mtl/mtl.hpp>

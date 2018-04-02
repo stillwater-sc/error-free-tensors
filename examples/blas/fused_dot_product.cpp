@@ -6,13 +6,11 @@
 
 // enable the mathematical constants in cmath: old-style preprocessor magic which isn't best practice anymore
 #define _USE_MATH_DEFINES
-#include "stdafx.h"
+#include "common.hpp"
 
 #include <vector>
 #include <posit>
 
-using namespace std;
-using namespace sw::unum;
 
 /*
 
@@ -38,6 +36,9 @@ const double pi = 3.14159265358979323846;  // best practice for C++
 
 int main(int argc, char** argv)
 try {
+	using namespace std;
+	using namespace sw::unum;
+
 	const size_t nbits = 16;
 	const size_t es = 1;
 	const size_t vecSize = 32;
@@ -66,6 +67,6 @@ try {
 	return (nrOfFailedTestCases > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 }
 catch (char* msg) {
-	cerr << msg << endl;
+	std::cerr << msg << std::endl;
 	return EXIT_FAILURE;
 }
