@@ -7,6 +7,7 @@
 #include "common.hpp"
 
 #include <posit>
+#define MTL_WITH_INITLIST 1
 #include <boost/numeric/mtl/mtl.hpp>
 
 // Turn it off for now
@@ -38,16 +39,21 @@ try {
 	using Vector = mtl::dense_vector<float>;
 #endif
 
+#if defined(MTL_WITH_INITLIST) && defined(MTL_WITH_AUTO) && defined(MTL_WITH_RANGEDFOR)
 	Matrix X = {
 		{0,0,1},
 		{0,1,1},
 		{1,0,1},
 		{1,1,1}
 	};
+#endif
 
 	// output data
-	Vector y = { 0, 1, 1, 0 };
+	Vector y = { 0.0f, 1.0f, 1.0f, 0.0f };
 
+	cout << "Weights are    :\n" << X << endl;
+	cout << "Training values: " << y << endl;
+#if 0
 	// synapse layers: syn0 = 2*np.random.random((3,4)) - 1
 	Matrix synapse_L0(3,4);
 	Matrix synapse_L1(4,1);
@@ -57,9 +63,9 @@ try {
 
 	// training 
 	for ( int j = 0; j < TRAINING_STEPS; j++ ) {
-		Matrix level_0 = X;
-		Matrix level_1 = Sigmoid<nbits, es>(dot(level_0, synapse_L0));
-		Matrix Level_2 = Sigmoid<nbits, es>(dot(level_1, synapse_L1));
+		Matrix l0 = X;
+		Matrix l1 = Sigmoid<nbits, es>(dot(l0, synapse_L0));
+		Matrix l2 = Sigmoid<nbits, es>(dot(l1, synapse_L1));
 
 		Vector l2_error = y - level_2;
 
@@ -78,6 +84,7 @@ try {
 
 	cout << "Output after training\n";
 	cout << l2 << endl;
+#endif
 
 	return EXIT_SUCCESS;
 }
