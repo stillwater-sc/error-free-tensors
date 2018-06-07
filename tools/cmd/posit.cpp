@@ -15,8 +15,6 @@
 #include "../../utilities/nbits_select.hpp"
 #include "../../utilities/nested_apply_visitor.hpp"
 
-using namespace std;
-using namespace sw::unum;
 
 struct print_es_variant 
   : public boost::static_visitor<void>
@@ -24,7 +22,7 @@ struct print_es_variant
     template <std::size_t ES>
     void operator()(const es_tag<ES>&) const
     {
-        cout << "es = " << ES << endl;
+		std::cout << "es = " << ES << std::endl;
     }
     
 };
@@ -35,7 +33,7 @@ struct print_nbits_variant
     template <std::size_t NBITS>
     void operator()(const nbits_tag<NBITS>&) const
     {
-        cout << "nbits = " << NBITS << endl;
+		std::cout << "nbits = " << NBITS << std::endl;
     }
     
 };
@@ -46,7 +44,7 @@ struct dummy_posit
 
 	void whoami() const
 	{
-		cout << "I am dummy_posit<" << Nbits << ", " << ES << ">.\n";
+		std::cout << "I am dummy_posit<" << Nbits << ", " << ES << ">.\n";
 	}
 
 };
@@ -57,7 +55,7 @@ struct posit_test1
 	void operator()() const
 	{
 		if (ES >= Nbits) {
-			cerr << "Are you insane? Nbits must be larger than ES.\n";
+			std::cerr << "Are you insane? Nbits must be larger than ES.\n";
 			throw "Stupid test";
 		}
 
@@ -77,14 +75,14 @@ struct posit_dispatcher
     void operator()() const
     {
         if (es+2 > nbits) {
-            cerr << "Size of posit defined by nbits must be larger than es+2.\n";
+            std::cerr << "Size of posit defined by nbits must be larger than es+2.\n";
             throw "Invalid posit configuration";
         }
             
 		// from namespace sw::unum::
-        posit<nbits, es> p(_value);
-		cout << spec_to_string(p) << endl;
-		cout << components_to_string(p) << endl;
+        sw::unum::posit<nbits, es> p(_value);
+		std::cout << spec_to_string(p) << std::endl;
+		std::cout << components_to_string(p) << std::endl;
     }
     
 	double _value;
@@ -92,6 +90,9 @@ struct posit_dispatcher
 
 int main(int argc, char** argv)
 try {
+	using namespace std;
+	using namespace sw::unum;
+
 	constexpr size_t default_nbits = 8;
 	constexpr size_t default_es = 0;
 	_global_value_to_assign = 1.0;
@@ -121,7 +122,11 @@ try {
     
 	return (errorNr > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 }
-catch (char* msg) {
-	cerr << msg << endl;
+catch (char* const msg) {
+	std::cerr << msg << std::endl;
+	return EXIT_FAILURE;
+}
+catch (...) {
+	std::cerr << "Caught unknown exception" << std::endl;
 	return EXIT_FAILURE;
 }
