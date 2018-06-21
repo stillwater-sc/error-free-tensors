@@ -2,7 +2,7 @@
 
 Artificial Intelligence Neural Network example
 
-# Kalman filter
+# Multilayer Perceptron
 
 This is a Neural Network using [MTL4](http://www.simunova.com). 
 
