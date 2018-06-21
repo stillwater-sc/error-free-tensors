@@ -1,16 +1,14 @@
-// kalman_filter.cpp example program comparing float vs posit kalman filtering
+// newton_raphson.cpp: example program showing the Newton-Raphson algorithm using valid arithmetic
 //
 // Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
-// enable the mathematical constants in cmath: old-style preprocessor magic which isn't best practice anymore
 #include "common.hpp"
 
 
-
-
-/* Boost example/newton-raphson.cpp
+/* 
+* Based on the Boost example/newton-raphson.cpp
 * Newton iteration for intervals
 *
 * Copyright 2003 Guillaume Melquiond
@@ -25,6 +23,7 @@ template <class I> I f(const I& x)
 {
 	return x * (x - 1.) * (x - 2.) * (x - 3.) * (x - 4.);
 }
+
 template <class I> I f_diff(const I& x)
 {
 	return (((5. * x - 40.) * x + 105.) * x - 100.) * x + 24.;

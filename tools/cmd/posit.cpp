@@ -1,4 +1,3 @@
-
 // posit.cpp: Test the run-time selection of posit formats
 //
 // Copyright (C) 2017 Stillwater Supercomputing, Inc.
