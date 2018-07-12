@@ -19,10 +19,10 @@ using nbits_variant = boost::variant<nbits_tag<3>, nbits_tag<4>, nbits_tag<5>, n
 using standard_variant = boost::variant<nbits_tag<8>, nbits_tag<16>, nbits_tag<32>, nbits_tag<64>>;
 using standard_ext_variant = boost::variant<nbits_tag<4>, nbits_tag<8>, nbits_tag<12>, nbits_tag<16>, nbits_tag<20>, nbits_tag<24>, nbits_tag<32>, nbits_tag<40>, nbits_tag<48>, nbits_tag<56>, nbits_tag<64>>;
 
-struct undefined_nbits_variant
+struct unsupported_nbits_variant
   : std::runtime_error
 {
-    undefined_nbits_variant() : std::runtime_error("Undefined nbits-variant") {}
+	unsupported_nbits_variant(size_t nbits) : std::runtime_error("nbits-variant: " + std::to_string(nbits) + " not supported") {}
 };
 
 /// Return the according variant or throw an exception.
@@ -51,7 +51,7 @@ inline nbits_variant nbits_select(size_t nbits)
 		case 21: return nbits_tag<21>{};
 		case 22: return nbits_tag<22>{};
 
-        default: throw undefined_nbits_variant{}; 
+        default: throw unsupported_nbits_variant{nbits}; 
     }
     
 }
@@ -65,7 +65,7 @@ inline standard_variant standard_select(size_t nbits)
 	case 32: return nbits_tag<32>{};
 	case 64: return nbits_tag<64>{};
 
-	default: throw undefined_nbits_variant{};
+	default: throw unsupported_nbits_variant{ nbits };
 	}
 
 }
@@ -86,7 +86,7 @@ inline standard_ext_variant standard_ext_select(size_t nbits)
 	case 56: return nbits_tag<56>{};
 	case 64: return nbits_tag<64>{};
 
-	default: throw undefined_nbits_variant{};
+	default: throw unsupported_nbits_variant{ nbits };
 	}
 
 }

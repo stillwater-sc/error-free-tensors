@@ -92,37 +92,35 @@ try {
 	using namespace std;
 	using namespace sw::unum;
 
-	constexpr size_t default_nbits = 8;
-	constexpr size_t default_es = 0;
 	_global_value_to_assign = 1.0;
 	int errorNr = 0;
 
     cout << "Usage: posit nbits es float-value\n";
-    
-    nbits_variant nbitsv = nbits_tag<default_nbits>{};               // init to avoid trouble without cmd line args
+   
+    nbits_variant nbitsv = nbits_tag<8>{};               // init to avoid trouble without cmd line args
     if (argc > 1)
         nbitsv = nbits_select(size_t(stoull(argv[1])));
     
-    //boost::apply_visitor(print_nbits_variant{}, nbitsv);
-    
-    
-    es_variant esv = es_tag<default_es>{};                           // init to avoid trouble without cmd line args
+    boost::apply_visitor(print_nbits_variant{}, nbitsv);
+     
+    es_variant esv = es_tag<0>{};                           // init to avoid trouble without cmd line args
     if (argc > 2)
         esv = es_select(size_t(stoull(argv[2])));
     
-    //boost::apply_visitor(print_es_variant{}, esv);
-
+    boost::apply_visitor(print_es_variant{}, esv);
+#if 0 
 	if (argc > 3)
 		_global_value_to_assign = stod(argv[3]);
 
     
     // And now it all boils down to this:
 	nested_apply_visitor(posit_dispatcher{}, nbitsv, esv);
-    
+#endif
+
 	return (errorNr > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 }
-catch (char* const msg) {
-	std::cerr << msg << std::endl;
+catch (unsupported_nbits_variant& err) {
+	std::cerr << err.what() << std::endl;
 	return EXIT_FAILURE;
 }
 catch (...) {

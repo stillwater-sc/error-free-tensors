@@ -22,7 +22,7 @@ struct print_es_variant
     template <std::size_t ES>
     void operator()(const es_tag<ES>&) const
     {
-        cout << "ES = " << ES << endl;
+        cout << "es = " << ES << endl;
     }
     
 };
